@@ -52,9 +52,7 @@ public class FlightController {
             throw new IllegalArgumentException("The flight with id: " + id + " is not exist");
         }
         Optional<Flight> myFlight = flights.stream().filter(flight -> flight.getId() == id).findFirst();
-        if (myFlight.isPresent()) {
-            flights.remove(myFlight);
-        }
+        myFlight.ifPresent(flight -> flights.remove(flight));
 
     }
 }
