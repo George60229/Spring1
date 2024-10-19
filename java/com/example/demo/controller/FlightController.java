@@ -5,10 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @RestController
 @RequestMapping("/api/flights")
@@ -28,10 +25,13 @@ public class FlightController {
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Flight getFlights(@PathVariable int id) {
-        return flights.stream()
+        Optional<Flight> myFlight = flights.stream()
                 .filter(flight -> flight.getId() == id)
-                .findFirst()
-                .orElse(null);
+                .findFirst();
+        if (myFlight.isEmpty()) {
+            throw new IllegalArgumentException("The flight with id: " + id + "is not found");
+        }
+        return myFlight.get();
     }
 
 
@@ -48,10 +48,13 @@ public class FlightController {
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteFlight(@PathVariable int id) {
-        if(flights.stream().noneMatch(flight -> flight.getId()==id)){
+        if (flights.stream().noneMatch(flight -> flight.getId() == id)) {
             throw new IllegalArgumentException("The flight with id: " + id + " is not exist");
         }
-        Flight myFlight = flights.stream().filter(flight -> flight.getId() == id).findFirst().get();
-        flights.remove(myFlight);
+        Optional<Flight> myFlight = flights.stream().filter(flight -> flight.getId() == id).findFirst();
+        if (myFlight.isPresent()) {
+            flights.remove(myFlight);
+        }
+
     }
 }
