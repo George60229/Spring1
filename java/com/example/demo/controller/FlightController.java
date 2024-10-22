@@ -17,23 +17,16 @@ public class FlightController {
     ));
 
     @GetMapping
-    @ResponseStatus(HttpStatus.OK)
-    public List<Flight> flights() {
+    public List<Flight> getFlights() {
         return flights;
     }
 
     @GetMapping("/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public Flight getFlights(@PathVariable int id) {
-        Optional<Flight> myFlight = flights.stream()
-                .filter(flight -> flight.getId() == id)
-                .findFirst();
-        if (myFlight.isEmpty()) {
-            throw new IllegalArgumentException("The flight with id: " + id + "is not found");
-        }
-        return myFlight.get();
+    public Flight getFlight(@PathVariable int id) {
+        return flights.stream()
+                .filter(flight -> flight.getId() == id).findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("The flight with id: " + id + " is not found"));
     }
-
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -48,11 +41,6 @@ public class FlightController {
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteFlight(@PathVariable int id) {
-        if (flights.stream().noneMatch(flight -> flight.getId() == id)) {
-            throw new IllegalArgumentException("The flight with id: " + id + " is not exist");
-        }
-        Optional<Flight> myFlight = flights.stream().filter(flight -> flight.getId() == id).findFirst();
-        myFlight.ifPresent(flight -> flights.remove(flight));
-
+        flights.removeIf(flight -> flight.getId() == id);
     }
 }
