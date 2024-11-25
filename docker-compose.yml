@@ -1,6 +1,20 @@
-version: '3.8'
+
 services:
+
+  postgres:
+    image: postgres:15
+    container_name: postgres_container
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 174180183
+      POSTGRES_DB: onpu
+    ports:
+      - "5432:5432"
+
   client-backend:
+    depends_on:
+      - postgres
     image: app.jar:latest
     build:
       context: .
