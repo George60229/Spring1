@@ -13,7 +13,12 @@ public class CityService {
 
     private CityRepository cityRepository;
 
-    public List<City> getAllCities(){
+    public List<City> getAllCities() {
         return cityRepository.findAll();
     }
+
+    protected City findCityByName(String name) {
+        return cityRepository.findByDisplayName(name);
+    }
+
 }

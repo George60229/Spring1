@@ -8,6 +8,6 @@ import java.util.List;
 
 @Repository
 public interface TicketRepository extends JpaRepository<Ticket, Integer> {
+    List<Ticket> findByUserProfileId(int id);
 
-    List<Ticket> findByUserProfile(int id);
 }

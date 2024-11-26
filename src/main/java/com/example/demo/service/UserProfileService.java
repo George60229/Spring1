@@ -22,4 +22,9 @@ public class UserProfileService {
         return userProfile.orElse(null);
     }
 
+    public UserProfile getUserByUsername(String username) {
+        Optional<UserProfile> userProfile = Optional.ofNullable(userProfileRepository.findByUsername(username));
+        return userProfile.orElse(null);
+    }
+
 }

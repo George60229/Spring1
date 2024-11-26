@@ -1,7 +1,6 @@
 package com.example.demo.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -14,9 +13,11 @@ import java.time.LocalDateTime;
 @Entity
 public class UserProfile {
     @Id
-    private Integer userId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
     private String firstName;
     private String secondName;
+    @Column(unique = true)
     private String username;
     private String password;
     private LocalDateTime createdAt;

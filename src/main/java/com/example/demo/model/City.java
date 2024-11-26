@@ -1,7 +1,6 @@
 package com.example.demo.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,7 +15,8 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class City {
     @Id
-    private Integer cityId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
     private LocalDateTime createdAt;
 

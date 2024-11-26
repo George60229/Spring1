@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.TicketDTO;
 import com.example.demo.model.Ticket;
 import com.example.demo.service.TicketService;
 import lombok.AllArgsConstructor;
@@ -27,9 +28,9 @@ public class TicketController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Ticket save(@RequestBody Ticket ticket) {
-        ticketService.createTicket(ticket);
-        return ticket;
+    public Ticket save(@RequestBody TicketDTO ticket) {
+        return ticketService.createTicket(ticket);
+
     }
 
 

@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.FlightDTO;
 import com.example.demo.model.Flight;
 import com.example.demo.service.FlightService;
 import lombok.AllArgsConstructor;
@@ -28,9 +29,8 @@ public class FlightController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Flight createFlight(@RequestBody Flight newFlight) {
-        flightService.createFlight(newFlight);
-        return newFlight;
+    public Flight createFlight(@RequestBody FlightDTO newFlight) {
+        return flightService.createFlight(newFlight);
     }
 
 }

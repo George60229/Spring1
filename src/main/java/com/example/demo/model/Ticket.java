@@ -1,9 +1,6 @@
 package com.example.demo.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -16,14 +13,15 @@ import java.time.LocalDateTime;
 @Entity
 public class Ticket {
     @Id
-    private Integer ticketId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
     private String pnr;
     private LocalDateTime createdAt;
     @ManyToOne
-    @JoinColumn(name = "flightId")
+    @JoinColumn(name = "flight_id")
     private Flight flight;
     @ManyToOne
-    @JoinColumn(name = "userId")
+    @JoinColumn(name = "user_id")
     private UserProfile userProfile;
 
 

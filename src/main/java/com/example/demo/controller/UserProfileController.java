@@ -18,12 +18,12 @@ public class UserProfileController {
     UserProfileService userProfileService;
 
     @GetMapping
-    public List<UserProfile> getAllUsers(){
+    public List<UserProfile> getAllUsers() {
         return userProfileService.getAllUsers();
     }
 
     @GetMapping("/{id}")
-    public UserProfile getUserById(@PathVariable int id){
+    public UserProfile getUserById(@PathVariable int id) {
         return userProfileService.getUser(id);
     }
 
