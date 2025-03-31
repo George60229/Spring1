@@ -12,6 +12,7 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 public class TicketService {
+
     TicketRepository ticketRepository;
 
     UserProfileService userProfileService;
