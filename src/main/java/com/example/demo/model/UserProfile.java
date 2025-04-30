@@ -22,4 +22,7 @@ public class UserProfile {
     private String password;
     private LocalDateTime createdAt;
 
+    @ManyToOne
+    private Role role;
+
 }
